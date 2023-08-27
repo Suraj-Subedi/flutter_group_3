@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:test/cart.dart';
+import 'package:test/home.dart';
+import 'package:test/profile.dart';
 
 void main() {
   runApp(
@@ -9,44 +12,98 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int currentIndex = 0;
+  List<Widget> screens = [
+    const HomeScreen(),
+    const CartScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Colors.grey,
-          width: double.maxFinite,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                color: Colors.red,
-                height: 100,
-                width: 100,
-              ),
-              Container(
-                color: Colors.blue,
-                height: 100,
-                width: 100,
-              ),
-              Container(
-                color: Colors.yellow,
-                height: 100,
-                width: 100,
-              ),
-              Container(
-                color: Colors.green,
-                height: 100,
-                width: 100,
-              ),
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: const Text('My App'),
       ),
+      backgroundColor: Colors.teal,
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (tappedIndex) {
+          setState(() {
+            currentIndex = tappedIndex;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
+              label: 'Cart'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+              ),
+              label: 'Profile'),
+        ],
+      ),
+      drawer: Drawer(
+        child: HomeScreen(),
+      ),
+      // body: SafeArea(
+      //   child: SingleChildScrollView(
+      //     child: Wrap(
+      //       children: [
+      //         for (int i = 0; i < 50; i++)
+      //           Container(
+      //               color: i % 2 == 0 ? Colors.black : Colors.white,
+      //               height: MediaQuery.of(context).size.width / 5,
+      //               width: MediaQuery.of(context).size.width / 5),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      // body: SafeArea(
+      //   child: Container(
+      //     // color: Colors.grey,
+      //     width: double.maxFinite,
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       // crossAxisAlignment: CrossAxisAlignment.stretch,
+      //       children: [
+      //         Container(
+      //           color: Colors.red,
+      //           height: 100,
+      //           width: 100,
+      //         ),
+      //         Container(
+      //           color: Colors.blue,
+      //           height: 100,
+      //           width: 100,
+      //         ),
+      //         Container(
+      //           color: Colors.yellow,
+      //           height: 100,
+      //           width: 100,
+      //         ),
+      //         Container(
+      //           color: Colors.green,
+      //           height: 100,
+      //           width: 100,
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
@@ -152,3 +209,4 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+
