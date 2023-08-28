@@ -5,6 +5,11 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Image(
+      fit: BoxFit.cover,
+      height: double.infinity,
+      image: NetworkImage(
+          'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?cs=srgb&dl=pexels-roberto-nickson-2486168.jpg&fm=jpg'),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/cart.dart';
 import 'package:test/home.dart';
 import 'package:test/profile.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
@@ -31,7 +32,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My App'),
+        title: Text(
+          'My App',
+          style: GoogleFonts.publicSans(),
+        ),
       ),
       backgroundColor: Colors.teal,
       body: screens[currentIndex],
@@ -56,9 +60,8 @@ class _MyAppState extends State<MyApp> {
               label: 'Profile'),
         ],
       ),
-      drawer: Drawer(
-        child: HomeScreen(),
-      ),
+      drawer: Drawer(),
+
       // body: SafeArea(
       //   child: SingleChildScrollView(
       //     child: Wrap(
