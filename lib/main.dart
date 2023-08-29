@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/cart.dart';
 import 'package:test/home.dart';
+import 'package:test/login.dart';
 import 'package:test/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,7 +9,8 @@ void main() {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyApp(),
+      // home: MyApp(),
+      home: LoginPage(),
     ),
   );
 }
