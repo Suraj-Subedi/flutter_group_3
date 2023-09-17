@@ -43,6 +43,7 @@ if (
                 "message" => "User registered Successfully!"
             ]));
         } else {
+
             echo json_encode(array([
                 "success" => false,
                 "message" => "User registration failed!"
@@ -61,6 +62,7 @@ if (
     //     "message" => "User registered Successfully!"
     // ]));
 } else {
+
     echo json_encode(array([
         "success" => false,
         "message" => "email, password and fullname is required"
