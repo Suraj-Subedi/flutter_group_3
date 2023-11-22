@@ -16,10 +16,10 @@ if (isset($_POST['email'], $_POST['password'])) {
     if ($result) {
         $count = mysqli_num_rows($result);
         if ($count == 0) {
-            echo json_encode(array([
+            echo json_encode([
                 "success" => false,
                 "message" => "User does not exists!"
-            ]));
+            ]);
             die();
         }
 
@@ -28,10 +28,10 @@ if (isset($_POST['email'], $_POST['password'])) {
         $is_correct = password_verify($password, $hashed_password);
 
         if (!$is_correct) {
-            echo json_encode(array([
+            echo json_encode([
                 "success" => false,
                 "message" => "Password is incorrect!"
-            ]));
+            ]);
             die();
         }
 
@@ -43,29 +43,29 @@ if (isset($_POST['email'], $_POST['password'])) {
         $result = mysqli_query($CON, $sql);
 
         if ($result) {
-            echo json_encode(array([
+            echo json_encode([
                 "success" => true,
                 "message" => "User logged in Successfully!",
                 "token" => $token,
                 "role" => $role
-            ]));
+            ]);
         } else {
 
-            echo json_encode(array([
+            echo json_encode([
                 "success" => false,
                 "message" => "User login failed!"
-            ]));
+            ]);
         }
     } else {
-        echo json_encode(array([
+        echo json_encode([
             "success" => false,
             "message" => "Something went wrong!"
-        ]));
+        ]);
         die();
     }
 } else {
-    echo json_encode(array([
+    echo json_encode([
         "success" => false,
         "message" => "Email and password is required!"
-    ]));
+    ]);
 }

@@ -24,10 +24,10 @@ if (
     if ($result) {
         $count = mysqli_num_rows($result);
         if ($count > 0) {
-            echo json_encode(array([
+            echo json_encode([
                 "success" => false,
                 "message" => "User already exists!"
-            ]));
+            ]);
             die();
         }
 
@@ -38,22 +38,22 @@ if (
         $result = mysqli_query($CON, $sql);
 
         if ($result) {
-            echo json_encode(array([
+            echo json_encode([
                 "success" => true,
                 "message" => "User registered Successfully!"
-            ]));
+            ]);
         } else {
 
-            echo json_encode(array([
+            echo json_encode([
                 "success" => false,
                 "message" => "User registration failed!"
-            ]));
+            ]);
         }
     } else {
-        echo json_encode(array([
+        echo json_encode([
             "success" => false,
             "message" => "Something went wrong!"
-        ]));
+        ]);
     }
 
 
@@ -63,8 +63,8 @@ if (
     // ]));
 } else {
 
-    echo json_encode(array([
+    echo json_encode([
         "success" => false,
         "message" => "email, password and fullname is required"
-    ]));
+    ]);
 }
