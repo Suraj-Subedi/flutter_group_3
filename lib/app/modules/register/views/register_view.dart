@@ -1,12 +1,11 @@
-import 'package:ecom_3/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/register_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class RegisterView extends GetView<RegisterController> {
+  const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,12 +17,11 @@ class LoginView extends GetView<LoginController> {
               vertical: 40,
             ),
             child: Form(
-              key: controller.loginFormKey,
+              key: controller.registerFormKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Image(image: NetworkImage(''))
                   CircleAvatar(
                     radius: 100,
                     child: ClipRRect(
@@ -45,13 +43,28 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 30),
                   const Text(
-                    'Enter login details',
+                    'Enter register details',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 20),
+                  TextFormField(
+                    controller: controller.fullNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Full name',
+                      hintText: 'Enter full name',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your full name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 25),
                   TextFormField(
                     controller: controller.emailController,
                     decoration: const InputDecoration(
@@ -88,12 +101,12 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 25),
                   ElevatedButton(
-                    onPressed: controller.onLogin,
+                    onPressed: controller.onRegister,
                     child: const SizedBox(
                       height: 50,
                       child: Center(
                         child: Text(
-                          'Login',
+                          'Register',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -104,15 +117,17 @@ class LoginView extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Don\'t have an account? ',
-                        style: TextStyle(fontSize: 16),
+                        'Already have an account? ',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.REGISTER);
+                          Get.back();
                         },
                         child: const Text(
-                          'Register',
+                          'Login',
                           style: TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,

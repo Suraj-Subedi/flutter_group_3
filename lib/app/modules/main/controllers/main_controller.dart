@@ -1,3 +1,4 @@
+import 'package:ecom_3/app/modules/appointments/views/appointments_view.dart';
 import 'package:ecom_3/app/modules/home/views/home_view.dart';
 import 'package:ecom_3/app/modules/profile/views/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,7 @@ class MainController extends GetxController {
   var currentIndex = 0.obs;
   List<Widget> screens = [
     HomeView(),
-    HomeView(),
-    HomeView(),
+    AppointmentsView(),
     ProfileView(),
   ];
 

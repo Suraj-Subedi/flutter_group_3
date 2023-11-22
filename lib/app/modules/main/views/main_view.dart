@@ -19,9 +19,8 @@ class MainView extends GetView<MainController> {
           currentIndex: controller.currentIndex.value,
           items: [
             FloatingNavbarItem(icon: Icons.home, title: 'Home'),
-            FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-            FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
-            FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
+            FloatingNavbarItem(icon: Icons.list, title: 'Appointments'),
+            FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
           ],
         ),
       ),
