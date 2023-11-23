@@ -10,37 +10,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     Get.lazyPut(() => HomeController());
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('HomeView'),
-          centerTitle: true,
-        ),
-        body: Obx(
-          () => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Center(
-                child: Text(
-                  'The count is',
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
-              Center(
-                child: Text(
-                  controller.count.value.toString(),
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    controller.increaseCount();
-                  },
-                  child: Text('Increment'),
-                ),
-              ),
-            ],
-          ),
-        ));
+      appBar: AppBar(
+        title: const Text('HomeView'),
+        centerTitle: true,
+      ),
+    );
   }
 }

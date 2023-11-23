@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/appointments_controller.dart';
+import '../controllers/specialities_controller.dart';
 
-class AppointmentsView extends GetView<AppointmentsController> {
-  const AppointmentsView({Key? key}) : super(key: key);
+class SpecialitiesView extends GetView<SpecialitiesController> {
+  const SpecialitiesView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Appointments'),
+        title: const Text('SpecialitiesView'),
         centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          'AppointmentsView is working',
+          'SpecialitiesView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

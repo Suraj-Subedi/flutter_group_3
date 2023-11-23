@@ -12,6 +12,11 @@ abstract class Routes {
   static const HOSPITAL = _Paths.HOSPITAL;
   static const HOSPITAL_MAIN = _Paths.HOSPITAL_MAIN;
   static const ADMIN_MAIN = _Paths.ADMIN_MAIN;
+  static const HOSTPITAL_HOME = _Paths.HOSTPITAL_HOME;
+  static const ADMIN_HOME = _Paths.ADMIN_HOME;
+  static const SPECIALITIES = _Paths.SPECIALITIES;
+  static const USERS = _Paths.USERS;
+  static const DOCTORS = _Paths.DOCTORS;
 }
 
 abstract class _Paths {
@@ -25,4 +30,9 @@ abstract class _Paths {
   static const HOSPITAL = '/hospital';
   static const HOSPITAL_MAIN = '/hospital-main';
   static const ADMIN_MAIN = '/admin-main';
+  static const HOSTPITAL_HOME = '/hostpital-home';
+  static const ADMIN_HOME = '/admin-home';
+  static const SPECIALITIES = '/specialities';
+  static const USERS = '/users';
+  static const DOCTORS = '/doctors';
 }

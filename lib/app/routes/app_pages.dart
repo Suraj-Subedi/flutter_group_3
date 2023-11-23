@@ -1,14 +1,19 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_home/bindings/admin_home_binding.dart';
+import '../modules/admin_home/views/admin_home_view.dart';
 import '../modules/admin_main/bindings/admin_main_binding.dart';
 import '../modules/admin_main/views/admin_main_view.dart';
 import '../modules/appointments/bindings/appointments_binding.dart';
 import '../modules/appointments/views/appointments_view.dart';
+import '../modules/doctors/bindings/doctors_binding.dart';
+import '../modules/doctors/views/doctors_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-
 import '../modules/hospital_main/bindings/hospital_main_binding.dart';
 import '../modules/hospital_main/views/hospital_main_view.dart';
+import '../modules/hostpital_home/bindings/hostpital_home_binding.dart';
+import '../modules/hostpital_home/views/hostpital_home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
@@ -19,6 +24,10 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/specialities/bindings/specialities_binding.dart';
+import '../modules/specialities/views/specialities_view.dart';
+import '../modules/users/bindings/users_binding.dart';
+import '../modules/users/views/users_view.dart';
 
 part 'app_routes.dart';
 
@@ -74,6 +83,31 @@ class AppPages {
       name: _Paths.ADMIN_MAIN,
       page: () => const AdminMainView(),
       binding: AdminMainBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOSTPITAL_HOME,
+      page: () => const HostpitalHomeView(),
+      binding: HostpitalHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_HOME,
+      page: () => const AdminHomeView(),
+      binding: AdminHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPECIALITIES,
+      page: () => const SpecialitiesView(),
+      binding: SpecialitiesBinding(),
+    ),
+    GetPage(
+      name: _Paths.USERS,
+      page: () => const UsersView(),
+      binding: UsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.DOCTORS,
+      page: () => const DoctorsView(),
+      binding: DoctorsBinding(),
     ),
   ];
 }
