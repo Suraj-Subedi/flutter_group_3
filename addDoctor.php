@@ -23,16 +23,52 @@ if (!isHospital($token)) {
 
 global $CON;
 
-if (isset($_POST['name'])) {
+if (isset($_POST['name'], $_POST['consultation_charge'], $_POST['specialization_id'], $_FILES['avatar'], $_POST['experience'],)) {
 
     $name = $_POST['name'];
     $consultation_charge = $_POST['consultation_charge'];
-    $hospital_id = $_POST['hospital_id'];
     $specialization_id = $_POST['specialization_id'];
-    $avatar = $_POST['avatar'];
+    $avatar = $_FILES['avatar'];
     $experience = $_POST['experience'];
+    $avatar_name = $avatar['name'];
+    $avatar_tmp_name = $avatar['tmp_name'];
+    $avatar_size = $avatar['size'];
 
-    $sql = "INSERT INTO doctors (name, consultation_charge, hospital_id, specialization_id, avatar, experience) VALUES ('$name', '$consultation_charge', '$hospital_id', '$specialization_id', '$avatar', '$experience')";
+    $hospital_Id = getUserId($token);
+
+    $ext = pathinfo($avatar_name, PATHINFO_EXTENSION);
+
+    if ($ext != "jpg" && $ext != "jpeg" && $ext != "png") {
+        echo json_encode([
+            "success" => false,
+            "message" => "Only image files are allowed!"
+        ]);
+        die();
+    }
+
+    if ($avatar_size > 1000000) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Image size should be less than 1MB!"
+        ]);
+        die();
+    }
+
+    $avatar_name = uniqid() . "." . $ext;
+
+    if (!move_uploaded_file($avatar_tmp_name, "./images/" . $avatar_name)) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Image upload failed!"
+        ]);
+        die();
+    }
+
+
+
+
+
+    $sql = "INSERT INTO doctors (name, consultation_charge, hospital_id, specialization_id, avatar, experience) VALUES ('$name', '$consultation_charge', '$hospital_Id', '$specialization_id', 'images/$avatar_name', '$experience')";
 
     $result = mysqli_query($CON, $sql);
 
