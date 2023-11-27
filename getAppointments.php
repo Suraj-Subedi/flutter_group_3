@@ -22,9 +22,9 @@ $sql = '';
 
 if ($is_hospital) {
 
-    $sql = "select * from appointments join doctors on appointments.doctor_id = doctors.id where doctors.hospital_id = $user_Id";
+    $sql = "select appointments.*,doctors.*,payments.user_id,payments.amount,payments.details from appointments left join payments on appointments.appointment_id=payments.appointment_id join doctors on appointments.doctor_id = doctors.id where doctors.hospital_id = $user_Id";
 } else {
-    $sql = "select * from appointments join doctors on appointments.doctor_id=doctors.id where user_id = $user_Id";
+    $sql = "select appointments.*,doctors.*,payments.user_id,payments.amount,payments.details from appointments left join payments on appointments.appointment_id=payments.appointment_id join doctors on appointments.doctor_id=doctors.id where user_id = $user_Id";
 }
 
 global $CON;
