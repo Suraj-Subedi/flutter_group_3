@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 const ipAddress = '192.168.1.71';
 
+var getImageUrl = (imageUrl) {
+  return 'http://$ipAddress/doctor_api/$imageUrl';
+};
+
 var showCustomSnackBar = ({
   required String message,
   bool isSuccess = false,
