@@ -26,7 +26,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void getSpecializations() async {
+  Future<void> getSpecializations() async {
     try {
       var url = Uri.http(ipAddress, 'doctor_api/getSpecialization');
 
@@ -52,7 +52,7 @@ class HomeController extends GetxController {
     }
   }
 
-  void getDoctors() async {
+  Future<void> getDoctors() async {
     try {
       var url = Uri.http(ipAddress, 'doctor_api/getDoctors');
 

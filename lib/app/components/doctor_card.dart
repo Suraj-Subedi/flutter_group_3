@@ -1,6 +1,9 @@
 import 'package:ecom_3/app/models/doctor.dart';
+import 'package:ecom_3/app/modules/doctor_detail/views/doctor_detail_view.dart';
+import 'package:ecom_3/app/routes/app_pages.dart';
 import 'package:ecom_3/app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DoctorCard extends StatelessWidget {
   final Doctor doctor;
@@ -20,11 +23,17 @@ class DoctorCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Image.network(
-              getImageUrl(doctor.avatar),
-              fit: BoxFit.cover,
-              height: double.infinity,
+            child: Hero(
+              tag: doctor.id!,
+              child: Image.network(
+                getImageUrl(doctor.avatar),
+                fit: BoxFit.cover,
+                height: double.infinity,
+              ),
             ),
+          ),
+          SizedBox(
+            width: 10,
           ),
           Expanded(
               child: Padding(
@@ -51,7 +60,9 @@ class DoctorCard extends StatelessWidget {
                 ),
                 //view doctor button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.DOCTOR_DETAIL, arguments: doctor);
+                  },
                   child: Text('View Doctor'),
                 ),
               ],

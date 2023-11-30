@@ -14,6 +14,9 @@ void main() async {
   var isAdmin = role == 'admin';
   runApp(
     GetMaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: token == null

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-const ipAddress = '192.168.1.71';
+const ipAddress = '192.168.1.9';
 
 var getImageUrl = (imageUrl) {
   return 'http://$ipAddress/doctor_api/$imageUrl';

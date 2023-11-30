@@ -6,6 +6,8 @@ import '../modules/admin_main/bindings/admin_main_binding.dart';
 import '../modules/admin_main/views/admin_main_view.dart';
 import '../modules/appointments/bindings/appointments_binding.dart';
 import '../modules/appointments/views/appointments_view.dart';
+import '../modules/doctor_detail/bindings/doctor_detail_binding.dart';
+import '../modules/doctor_detail/views/doctor_detail_view.dart';
 import '../modules/doctors/bindings/doctors_binding.dart';
 import '../modules/doctors/views/doctors_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -108,6 +110,11 @@ class AppPages {
       name: _Paths.DOCTORS,
       page: () => const DoctorsView(),
       binding: DoctorsBinding(),
+    ),
+    GetPage(
+      name: _Paths.DOCTOR_DETAIL,
+      page: () => const DoctorDetailView(),
+      binding: DoctorDetailBinding(),
     ),
   ];
 }
