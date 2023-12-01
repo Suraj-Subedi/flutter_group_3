@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 const ipAddress = '192.168.1.9';
 
+MaterialColor primaryColor = Colors.purple;
 var getImageUrl = (imageUrl) {
   return 'http://$ipAddress/doctor_api/$imageUrl';
 };

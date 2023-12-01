@@ -1,3 +1,4 @@
+import 'package:ecom_3/app/utils/constants.dart';
 import 'package:ecom_3/app/utils/memory.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: primaryColor,
       ),
       debugShowCheckedModeBanner: false,
       title: "Application",

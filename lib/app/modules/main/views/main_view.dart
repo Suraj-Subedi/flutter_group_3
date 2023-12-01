@@ -1,3 +1,4 @@
+import 'package:ecom_3/app/utils/constants.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class MainView extends GetView<MainController> {
       () => Scaffold(
         body: controller.screens[controller.currentIndex.value],
         bottomNavigationBar: FloatingNavbar(
+          backgroundColor: primaryColor,
           onTap: (int val) {
             controller.currentIndex.value = val;
           },

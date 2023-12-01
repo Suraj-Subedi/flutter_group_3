@@ -1,4 +1,5 @@
 import 'package:ecom_3/app/components/doctor_card.dart';
+import 'package:ecom_3/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class HomeView extends GetView<HomeController> {
                         itemBuilder: (context, index) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            color: Colors.blue.withOpacity(0.7),
+                            color: primaryColor.withOpacity(0.7),
                           ),
                           margin: const EdgeInsets.only(
                             right: 10,
