@@ -101,73 +101,126 @@ class AddDoctorPopup extends StatelessWidget {
           title: const Text('Add Doctor'),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 15,
-          ),
-          child: Column(
-            children: [
-              TextFormField(
-                controller: controller.doctorNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Email address',
-                  hintText: 'Enter your email address',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email address';
-                  } else if (!GetUtils.isEmail(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: controller.chargeController,
-                decoration: const InputDecoration(
-                  labelText: 'Email address',
-                  hintText: 'Enter your email address',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email address';
-                  } else if (!GetUtils.isEmail(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: controller.experienceController,
-                decoration: const InputDecoration(
-                  labelText: 'Email address',
-                  hintText: 'Enter your email address',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email address';
-                  } else if (!GetUtils.isEmail(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              GetBuilder<DoctorsController>(
-                builder: (controller) =>
-                    (controller.image == null || controller.imageBytes == null)
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 15,
+            ),
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: controller.doctorNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Doctor Name',
+                      hintText: 'Enter your doctor name',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your doctor name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: controller.chargeController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Consultation Charge',
+                      hintText: 'Enter your consultation charge',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your consultation charge';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: controller.experienceController,
+                    decoration: const InputDecoration(
+                        labelText: 'Experience',
+                        hintText: 'Enter your experience',
+                        border: OutlineInputBorder(),
+                        suffixIcon: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Years'),
+                          ],
+                        )),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your experience';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GetBuilder<HomeController>(
+                    builder: (homeController) {
+                      if (homeController.specializationResponse == null) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return DropdownButtonFormField<String>(
+                        items: homeController
+                            .specializationResponse!.specalizations!
+                            .map((e) => DropdownMenuItem(
+                                  value: e.specializationId.toString(),
+                                  child: Text(e.title ?? ''),
+                                ))
+                            .toList(),
+
+                        // items: [
+                        //   DropdownMenuItem(
+                        //     child: Text('Admin'),
+                        //     value: 'admin',
+                        //   ),
+                        //   DropdownMenuItem(
+                        //     child: Text('Hospital'),
+                        //     value: 'hospital',
+                        //   ),
+                        // ],
+
+                        onChanged: (v) {
+                          controller.specializationId = v;
+                          controller.update();
+                        },
+                        value: controller.specializationId,
+                        decoration: const InputDecoration(
+                          labelText: 'Specialization',
+                          hintText: 'Select doctor specialization',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select doctor specialization';
+                          }
+                          return null;
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GetBuilder<DoctorsController>(
+                    builder: (controller) => (controller.image == null ||
+                            controller.imageBytes == null)
                         ? ElevatedButton(
                             onPressed: controller.pickImage,
                             child: const Text('Upload Image'),
@@ -202,8 +255,17 @@ class AddDoctorPopup extends StatelessWidget {
                               )
                             ],
                           ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: controller.addDoctor,
+                    child: const Text('Add Doctor'),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

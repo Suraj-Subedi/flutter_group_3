@@ -1,8 +1,13 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:ecom_3/app/modules/home/controllers/home_controller.dart';
+import 'package:ecom_3/app/utils/constants.dart';
+import 'package:ecom_3/app/utils/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class DoctorsController extends GetxController {
   var doctorNameController = TextEditingController();
@@ -11,6 +16,8 @@ class DoctorsController extends GetxController {
   ImagePicker picker = ImagePicker();
   XFile? image;
   Uint8List? imageBytes;
+  String? specializationId;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final count = 0.obs;
   @override
@@ -26,6 +33,62 @@ class DoctorsController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void addDoctor() async {
+    try {
+      if (formKey.currentState!.validate()) {
+        if (imageBytes == null) {
+          showCustomSnackBar(
+            message: 'Please select image',
+          );
+          return;
+        }
+
+        var url = Uri.http(ipAddress, 'doctor_api/addDoctor');
+
+        var request = http.MultipartRequest('POST', url);
+        request.fields['token'] = Memory.getToken() ?? '';
+        request.fields['name'] = doctorNameController.text;
+        request.fields['consultation_charge'] = chargeController.text;
+        request.fields['experience'] = experienceController.text;
+        request.fields['specialization_id'] = specializationId ?? '';
+        request.files.add(http.MultipartFile.fromBytes(
+          'avatar',
+          imageBytes!,
+          filename: image!.name,
+        ));
+
+        var response = await request.send();
+        var data = await response.stream.bytesToString();
+        var result = jsonDecode(data);
+
+        if (result['success']) {
+          doctorNameController.clear();
+          chargeController.clear();
+          experienceController.clear();
+          specializationId = null;
+          imageBytes = null;
+          image = null;
+          update();
+          Get.back();
+          showCustomSnackBar(
+            message: result['message'],
+            isSuccess: true,
+          );
+
+          Get.find<HomeController>().getDoctors();
+        } else {
+          showCustomSnackBar(
+            message: result['message'],
+          );
+        }
+      }
+    } catch (e) {
+      showCustomSnackBar(
+        message: 'Something went wrong',
+      );
+    }
   }
 
   void pickImage() async {
