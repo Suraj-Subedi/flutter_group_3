@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DoctorDetailController extends GetxController {
-  //TODO: Implement DoctorDetailController
+  var dateController = TextEditingController();
+  var timeController = TextEditingController();
+  var problemsController = TextEditingController();
 
   final count = 0.obs;
   @override

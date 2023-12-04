@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-const ipAddress = '192.168.1.9';
+const ipAddress = '192.168.1.17';
 
 MaterialColor primaryColor = Colors.purple;
 var getImageUrl = (imageUrl) {

@@ -13,7 +13,7 @@ class DoctorsController extends GetxController {
   var doctorNameController = TextEditingController();
   var chargeController = TextEditingController();
   var experienceController = TextEditingController();
-  ImagePicker picker = ImagePicker();
+
   XFile? image;
   Uint8List? imageBytes;
   String? specializationId;
@@ -93,6 +93,7 @@ class DoctorsController extends GetxController {
 
   void pickImage() async {
     try {
+      ImagePicker picker = ImagePicker();
       image = await picker.pickImage(source: ImageSource.gallery);
       if (image == null) {
         return;

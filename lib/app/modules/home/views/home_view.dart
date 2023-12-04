@@ -14,7 +14,9 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mero Doctor'),
+        title: const Text(
+          'Mero Doctor',
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
