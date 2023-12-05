@@ -71,104 +71,142 @@ class MakeAppointmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<DoctorDetailController>();
+    var controller = Get.put(DoctorDetailController());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(doctor.name ?? ''),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            TextFormField(
-              readOnly: true,
-              controller: controller.dateController,
-              decoration: InputDecoration(
-                  labelText: 'Booking Date',
-                  hintText: 'Select your booking date',
-                  border: OutlineInputBorder(),
-                  disabledBorder: OutlineInputBorder(),
-                  suffixIcon: IconButton(
+        appBar: AppBar(
+          title: Text(doctor.name ?? ''),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  readOnly: true,
+                  controller: controller.dateController,
+                  decoration: InputDecoration(
+                      labelText: 'Booking Date',
+                      hintText: 'Select your booking date',
+                      border: OutlineInputBorder(),
+                      disabledBorder: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                          onPressed: () async {
+                            DateTime? date = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime.now().add(
+                                const Duration(days: 30),
+                              ),
+                            );
+                            if (date != null) {
+                              controller.dateController.text =
+                                  date.toString().split(' ')[0];
+                            }
+                          },
+                          icon: Icon(Icons.calendar_month))),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select your booking date';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  readOnly: true,
+                  controller: controller.timeController,
+                  decoration: InputDecoration(
+                    labelText: 'Booking Time',
+                    hintText: 'Select your booking time',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
                       onPressed: () async {
-                        DateTime? date = await showDatePicker(
+                        TimeOfDay? time = await showTimePicker(
                           context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(
-                            const Duration(days: 30),
-                          ),
+                          initialTime: TimeOfDay.now(),
                         );
-                        if (date != null) {
-                          controller.dateController.text =
-                              date.toString().split(' ')[0];
+                        if (time != null) {
+                          controller.timeController.text =
+                              '${time.hour}:${time.minute}';
                         }
                       },
-                      icon: Icon(Icons.calendar_month))),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please select your booking date';
-                }
-                return null;
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              readOnly: true,
-              controller: controller.timeController,
-              decoration: InputDecoration(
-                labelText: 'Booking Time',
-                hintText: 'Select your booking time',
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: () async {
-                    TimeOfDay? time = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                    );
-                    if (time != null) {
-                      controller.timeController.text =
-                          '${time.hour}:${time.minute}';
+                      icon: const Icon(Icons.timer),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your booking time';
                     }
+                    return null;
                   },
-                  icon: Icon(Icons.timer),
                 ),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your experience';
-                }
-                return null;
-              },
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  minLines: 5,
+                  maxLines: 5,
+                  maxLength: 5000,
+                  keyboardType: TextInputType.text,
+                  controller: controller.problemsController,
+                  decoration: const InputDecoration(
+                    labelText: 'Problems(optional)',
+                    hintText: 'Enter your problems',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              controller: controller.problemsController,
-              decoration: const InputDecoration(
-                  labelText: 'Experience',
-                  hintText: 'Enter your experience',
-                  border: OutlineInputBorder(),
-                  suffixIcon: Column(
+          ),
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          height: 100,
+          child: Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    elevation: 20,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                    ),
+                  ),
+                  onPressed: controller.makeBooking,
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Years'),
+                      Image.network(
+                        khaltiLogo,
+                        width: 30,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Text(
+                        'Pay with Khalti',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
-                  )),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your experience';
-                }
-                return null;
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
+
+const khaltiLogo =
+    "https://play-lh.googleusercontent.com/Xh_OlrdkF1UnGCnMN__4z-yXffBAEl0eUDeVDPr4UthOERV4Fll9S-TozSfnlXDFzw";

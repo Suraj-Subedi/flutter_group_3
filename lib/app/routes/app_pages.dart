@@ -22,6 +22,8 @@ import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/random/bindings/random_binding.dart';
+import '../modules/random/views/random_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
@@ -115,6 +117,11 @@ class AppPages {
       name: _Paths.DOCTOR_DETAIL,
       page: () => const DoctorDetailView(),
       binding: DoctorDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.RANDOM,
+      page: () => const RandomView(),
+      binding: RandomBinding(),
     ),
   ];
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,21 +15,32 @@ void main() async {
   var isHospital = role == 'hospital';
   var isAdmin = role == 'admin';
   runApp(
-    GetMaterialApp(
-      theme: ThemeData(
-        primarySwatch: primaryColor,
+    KhaltiScope(
+      publicKey: "test_public_key_dde0878862604f24b2475a9806c833d2",
+      builder: (context, navigatorKey) => GetMaterialApp(
+        navigatorKey: navigatorKey,
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ne', 'NP'),
+        ],
+        localizationsDelegates: const [
+          KhaltiLocalizations.delegate,
+        ],
+        theme: ThemeData(
+          primarySwatch: primaryColor,
+        ),
+        debugShowCheckedModeBanner: false,
+        title: "Application",
+        initialRoute: token == null
+            ? Routes.LOGIN
+            : isHospital
+                ? Routes.HOSPITAL_MAIN
+                : isAdmin
+                    ? Routes.ADMIN_MAIN
+                    : Routes.MAIN,
+        getPages: AppPages.routes,
+        defaultTransition: Transition.cupertino,
       ),
-      debugShowCheckedModeBanner: false,
-      title: "Application",
-      initialRoute: token == null
-          ? Routes.LOGIN
-          : isHospital
-              ? Routes.HOSPITAL_MAIN
-              : isAdmin
-                  ? Routes.ADMIN_MAIN
-                  : Routes.MAIN,
-      getPages: AppPages.routes,
-      defaultTransition: Transition.cupertino,
     ),
   );
 }
