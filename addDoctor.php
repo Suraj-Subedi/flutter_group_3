@@ -38,7 +38,7 @@ if (isset($_POST['name'], $_POST['consultation_charge'], $_POST['specialization_
 
     $ext = pathinfo($avatar_name, PATHINFO_EXTENSION);
 
-    if ($ext != "jpg" && $ext != "jpeg" && $ext != "png") {
+    if ($ext != "jpg" && $ext != "jpeg" && $ext != "png" && $ext != "webp") {
         echo json_encode([
             "success" => false,
             "message" => "Only image files are allowed!"

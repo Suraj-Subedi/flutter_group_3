@@ -28,10 +28,12 @@ if (
     $sql = "insert into appointments (user_id,doctor_id,date,problems) values ('$user_id','$doctor_id','$date','$problems')";
     global $CON;
     $result = mysqli_query($CON, $sql);
+    $appointment_id = mysqli_insert_id($CON);
     if ($result) {
         echo json_encode([
             "success" => true,
             "message" => "Appointment made successfully!",
+            "appointment_id" => $appointment_id
         ]);
     } else {
         echo json_encode([

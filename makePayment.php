@@ -40,6 +40,10 @@ if (isset($_POST['appointmentId'], $_POST['amount'], $_POST['details'])) {
 
     $result = mysqli_query($CON, $sql);
 
+    $sql = "update appointments set status = 'paid' where appointment_id = $appointment_id";
+
+    $result = mysqli_query($CON, $sql);
+
     if (!$result) {
         echo json_encode([
             "success" => false,

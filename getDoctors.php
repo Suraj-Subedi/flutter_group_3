@@ -20,9 +20,9 @@ $hospital_Id = getUserId($token);
 $sql = '';
 
 if ($is_hospital) {
-    $sql = "SELECT doctors.*,specialization.*,users.full_name, users.email, users.address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id where hospital_id = $hospital_Id";
+    $sql = "SELECT doctors.*,specialization.*,users.full_name as hospital_name, users.email as hospital_email, users.address as hospital_address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id where hospital_id = $hospital_Id";
 } else {
-    $sql = "SELECT doctors.*,specialization.*,users.full_name, users.email, users.address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id";
+    $sql = "SELECT doctors.*,specialization.*,users.full_name as hospital_name, users.email as hospital_email, users.address as hospital_address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id";
 }
 
 global $CON;
@@ -39,7 +39,7 @@ if ($result) {
     echo json_encode([
         "success" => true,
         "message" => "Doctors fetched successfully!",
-        "data" => $doctors
+        "doctors" => $doctors
     ]);
 } else {
     echo json_encode([

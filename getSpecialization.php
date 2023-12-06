@@ -27,7 +27,7 @@ if ($result) {
     echo json_encode([
         "success" => true,
         "message" => "Specializations fetched successfully!",
-        "data" => $specializations
+        "specalizations" => $specializations
     ]);
 } else {
     echo json_encode([
