@@ -10,10 +10,10 @@ class AppointmentsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getAppointments();
+    getMyDetails();
   }
 
-  void getAppointments() async {
+  void getMyDetails() async {
     try {
       Uri url = Uri.http(ipAddress, 'doctor_api/getAppointments');
 

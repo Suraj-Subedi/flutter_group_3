@@ -1,4 +1,5 @@
 import 'package:ecom_3/app/components/doctor_card.dart';
+import 'package:ecom_3/app/routes/app_pages.dart';
 import 'package:ecom_3/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -55,23 +56,30 @@ class HomeView extends GetView<HomeController> {
                         itemCount: controller.specializationResponse
                                 ?.specalizations?.length ??
                             0,
-                        itemBuilder: (context, index) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: primaryColor.withOpacity(0.7),
-                          ),
-                          margin: const EdgeInsets.only(
-                            right: 10,
-                            top: 10,
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          child: Center(
-                            child: Text(
-                              controller.specializationResponse
-                                      ?.specalizations?[index].title ??
-                                  '',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 18),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.DETAIL_CATEGORY,
+                                arguments: controller.specializationResponse
+                                    ?.specalizations?[index]);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: primaryColor.withOpacity(0.7),
+                            ),
+                            margin: const EdgeInsets.only(
+                              right: 10,
+                              top: 10,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Center(
+                              child: Text(
+                                controller.specializationResponse
+                                        ?.specalizations?[index].title ??
+                                    '',
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
                             ),
                           ),
                         ),

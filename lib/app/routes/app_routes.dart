@@ -19,6 +19,7 @@ abstract class Routes {
   static const DOCTORS = _Paths.DOCTORS;
   static const DOCTOR_DETAIL = _Paths.DOCTOR_DETAIL;
   static const RANDOM = _Paths.RANDOM;
+  static const DETAIL_CATEGORY = _Paths.DETAIL_CATEGORY;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const DOCTORS = '/doctors';
   static const DOCTOR_DETAIL = '/doctor-detail';
   static const RANDOM = '/random';
+  static const DETAIL_CATEGORY = '/detail-category';
 }

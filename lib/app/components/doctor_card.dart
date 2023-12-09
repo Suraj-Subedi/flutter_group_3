@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 
 class DoctorCard extends StatelessWidget {
   final Doctor doctor;
-  const DoctorCard({super.key, required this.doctor});
+  final bool showAnimation;
+  const DoctorCard(
+      {super.key, required this.doctor, this.showAnimation = true});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,20 @@ class DoctorCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Hero(
-              tag: doctor.id!,
-              child: Image.network(
-                getImageUrl(doctor.avatar),
-                fit: BoxFit.cover,
-                height: double.infinity,
-              ),
-            ),
+            child: showAnimation
+                ? Hero(
+                    tag: doctor.id!,
+                    child: Image.network(
+                      getImageUrl(doctor.avatar),
+                      fit: BoxFit.cover,
+                      height: double.infinity,
+                    ),
+                  )
+                : Image.network(
+                    getImageUrl(doctor.avatar),
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                  ),
           ),
           SizedBox(
             width: 10,

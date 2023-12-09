@@ -6,6 +6,8 @@ import '../modules/admin_main/bindings/admin_main_binding.dart';
 import '../modules/admin_main/views/admin_main_view.dart';
 import '../modules/appointments/bindings/appointments_binding.dart';
 import '../modules/appointments/views/appointments_view.dart';
+import '../modules/detail_category/bindings/detail_category_binding.dart';
+import '../modules/detail_category/views/detail_category_view.dart';
 import '../modules/doctor_detail/bindings/doctor_detail_binding.dart';
 import '../modules/doctor_detail/views/doctor_detail_view.dart';
 import '../modules/doctors/bindings/doctors_binding.dart';
@@ -122,6 +124,11 @@ class AppPages {
       name: _Paths.RANDOM,
       page: () => const RandomView(),
       binding: RandomBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_CATEGORY,
+      page: () => DetailCategoryView(),
+      binding: DetailCategoryBinding(),
     ),
   ];
 }

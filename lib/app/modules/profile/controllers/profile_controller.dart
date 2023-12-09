@@ -1,23 +1,41 @@
+import 'package:ecom_3/app/utils/constants.dart';
+import 'package:ecom_3/app/utils/memory.dart';
 import 'package:get/get.dart';
+import 'package:ecom_3/app/models/user.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+  UserResponse? userResponse;
 
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    getAppointments();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void getAppointments() async {
+    try {
+      Uri url = Uri.http(ipAddress, 'doctor_api/getMyDetails');
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+      var response = await http.post(url, body: {"token": Memory.getToken()});
 
-  void increment() => count.value++;
+      // print(response.body);
+
+      var result = userResponseFromJson(response.body);
+
+      if (result.success ?? false) {
+        userResponse = result;
+        update();
+      } else {
+        showCustomSnackBar(
+          message: result.message ?? '',
+        );
+      }
+    } catch (e) {
+      showCustomSnackBar(
+        message: e.toString(),
+      );
+    }
+  }
 }
