@@ -22,7 +22,7 @@ $sql = '';
 if ($is_hospital) {
     $sql = "SELECT doctors.*,specialization.*,users.full_name as hospital_name, users.email as hospital_email, users.address as hospital_address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id where hospital_id = $hospital_Id";
 } else {
-    $sql = "SELECT doctors.*,specialization.*,users.full_name as hospital_name, users.email as hospital_email, users.address as hospital_address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id";
+    $sql = "SELECT doctors.*,specialization.*,users.full_name as hospital_name, users.email as hospital_email, users.address as hospital_address FROM doctors join users on doctors.hospital_id = users.user_id join specialization on doctors.specialization_id = specialization.specialization_id where isDeleted=0";
 }
 
 global $CON;

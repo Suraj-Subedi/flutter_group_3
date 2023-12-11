@@ -24,7 +24,7 @@ if ($is_hospital) {
 
     $sql = "select appointments.*,doctors.*,payments.user_id,payments.amount,payments.details from appointments left join payments on appointments.appointment_id=payments.appointment_id join doctors on appointments.doctor_id = doctors.id where doctors.hospital_id = $user_Id";
 } else {
-    $sql = "select appointments.*,doctors.*,payments.user_id,payments.amount,payments.details from appointments left join payments on appointments.appointment_id=payments.appointment_id join doctors on appointments.doctor_id=doctors.id where user_id = $user_Id";
+    $sql = "select appointments.*,doctors.*,payments.user_id,payments.amount,payments.details from appointments left join payments on appointments.appointment_id=payments.appointment_id join doctors on appointments.doctor_id=doctors.id where appointments.user_id = $user_Id";
 }
 
 global $CON;
@@ -41,7 +41,7 @@ if ($result) {
     echo json_encode([
         "success" => true,
         "message" => "Appointments fetched successfully!",
-        "data" => $appointments
+        "appointments" => $appointments
     ]);
 } else {
     echo json_encode([

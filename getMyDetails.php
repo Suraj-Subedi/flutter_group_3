@@ -26,7 +26,7 @@ if ($result) {
     echo json_encode([
         "success" => true,
         "message" => "User details fetched successfully!",
-        "data" => $user
+        "user" => $user
     ]);
 } else {
     echo json_encode([
