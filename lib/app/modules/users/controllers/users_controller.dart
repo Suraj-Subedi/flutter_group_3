@@ -1,23 +1,53 @@
+import 'dart:convert';
+
+import 'package:ecom_3/app/utils/constants.dart';
+import 'package:ecom_3/app/utils/memory.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class UsersController extends GetxController {
-  //TODO: Implement UsersController
-
-  final count = 0.obs;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var fullNameController = TextEditingController();
+  var registerFormKey = GlobalKey<FormState>();
+  String roleValue = 'user';
   @override
   void onInit() {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void onRegister() async {
+    if (registerFormKey.currentState!.validate()) {
+      try {
+        var url = Uri.http(ipAddress, 'doctor_api/addUser');
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+        var response = await http.post(url, body: {
+          'token': Memory.getToken(),
+          'fullname': fullNameController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+          'role': roleValue,
+        });
 
-  void increment() => count.value++;
+        var result = jsonDecode(response.body);
+
+        if (result['success']) {
+          Get.back();
+          showCustomSnackBar(
+            message: result['message'],
+            isSuccess: true,
+          );
+        } else {
+          showCustomSnackBar(
+            message: result['message'],
+          );
+        }
+      } catch (e) {
+        showCustomSnackBar(
+          message: 'Something went wrong',
+        );
+      }
+    }
+  }
 }

@@ -28,9 +28,10 @@ void main() async {
         ],
         theme: ThemeData(
           primarySwatch: primaryColor,
+          useMaterial3: false,
         ),
         debugShowCheckedModeBanner: false,
-        title: "Application",
+        title: "Mero Doctor",
         initialRoute: token == null
             ? Routes.LOGIN
             : isHospital

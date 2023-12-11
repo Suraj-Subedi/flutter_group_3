@@ -46,12 +46,23 @@ class DoctorsView extends GetView<DoctorsController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                doctor.name ?? '',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    (doctor.name ?? ''),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    doctor.isDeleted == '1' ? ' (Deleted)' : '',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 doctor.title ?? '',
@@ -67,7 +78,18 @@ class DoctorsView extends GetView<DoctorsController> {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {},
+                          icon: doctor.isDeleted == '1'
+                              ? const Icon(
+                                  Icons.restore,
+                                  color: Colors.green,
+                                )
+                              : const Icon(Icons.delete),
+                          color: Colors.red,
+                        ),
                       ],
                     ),
                   );
@@ -81,7 +103,7 @@ class DoctorsView extends GetView<DoctorsController> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return AddDoctorPopup();
+                  return const AddDoctorPopup();
                 });
           },
           child: const Icon(Icons.add),

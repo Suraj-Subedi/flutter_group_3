@@ -48,6 +48,7 @@ class Doctor {
   final String? avatar;
   final String? experience;
   final String? hospitalId;
+  final String? isDeleted;
   final String? title;
   final String? hospitalName;
   final String? hospitalEmail;
@@ -61,6 +62,7 @@ class Doctor {
     this.avatar,
     this.experience,
     this.hospitalId,
+    this.isDeleted,
     this.title,
     this.hospitalName,
     this.hospitalEmail,
@@ -75,6 +77,7 @@ class Doctor {
         avatar: json["avatar"],
         experience: json["experience"],
         hospitalId: json["hospital_id"],
+        isDeleted: json["isDeleted"],
         title: json["title"],
         hospitalName: json["hospital_name"],
         hospitalEmail: json["hospital_email"],
@@ -89,6 +92,7 @@ class Doctor {
         "avatar": avatar,
         "experience": experience,
         "hospital_id": hospitalId,
+        "isDeleted": isDeleted,
         "title": title,
         "hospital_name": hospitalName,
         "hospital_email": hospitalEmail,
