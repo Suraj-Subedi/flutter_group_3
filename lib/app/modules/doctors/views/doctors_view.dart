@@ -11,6 +11,7 @@ class DoctorsView extends GetView<DoctorsController> {
   @override
   Widget build(BuildContext context) {
     Get.put(DoctorsController());
+    var doctorController = controller;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Doctors'),
@@ -81,7 +82,36 @@ class DoctorsView extends GetView<DoctorsController> {
                         ),
                         const Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(doctor.isDeleted == '0'
+                                      ? 'Delete doctor'
+                                      : 'Restore Doctor'),
+                                  content: Text(doctor.isDeleted == '0'
+                                      ? "Are you sure want to delete?"
+                                      : "Are you sure want to restore?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        doctorController
+                                            .deleteDoctor(doctor.id ?? '');
+                                      },
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: const Text('No'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           icon: doctor.isDeleted == '1'
                               ? const Icon(
                                   Icons.restore,

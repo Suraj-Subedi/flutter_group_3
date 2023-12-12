@@ -102,4 +102,34 @@ class DoctorsController extends GetxController {
       update();
     } catch (e) {}
   }
+
+  void deleteDoctor(String doctorId) async {
+    try {
+      var url = Uri.http(ipAddress, 'doctor_api/deleteDoctor');
+
+      var response = await http.post(url, body: {
+        'token': Memory.getToken(),
+        'doctor_id': doctorId,
+      });
+
+      var result = jsonDecode(response.body);
+
+      if (result['success']) {
+        Get.back();
+        showCustomSnackBar(
+          message: result['message'],
+          isSuccess: true,
+        );
+        await Get.find<HomeController>().getDoctors();
+      } else {
+        showCustomSnackBar(
+          message: result['message'],
+        );
+      }
+    } catch (e) {
+      showCustomSnackBar(
+        message: 'Something went wrong',
+      );
+    }
+  }
 }
