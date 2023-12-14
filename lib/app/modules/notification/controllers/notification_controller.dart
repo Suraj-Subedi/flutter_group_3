@@ -1,17 +1,17 @@
-import 'package:ecom_3/app/models/stats.dart';
+import 'package:ecom_3/app/models/notification.dart';
 import 'package:ecom_3/app/utils/constants.dart';
 import 'package:ecom_3/app/utils/memory.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class AdminHomeController extends GetxController {
-  StatsResponse? statsResponse;
+class NotificationController extends GetxController {
+  NotificationResponse? notificationResponse;
 
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
-    getStats();
+    getNotification();
   }
 
   @override
@@ -24,22 +24,22 @@ class AdminHomeController extends GetxController {
     super.onClose();
   }
 
-  void getStats() async {
+  void getNotification() async {
     try {
-      var url = Uri.http(ipAddress, 'doctor_api/getStats');
+      var url = Uri.http(ipAddress, 'doctor_api/getNotifications');
 
       var response = await http.post(url, body: {"token": Memory.getToken()});
-      statsResponse = statsResponseFromJson(response.body);
+      notificationResponse = notificationResponseFromJson(response.body);
       update();
 
-      if (statsResponse?.success ?? false) {
+      if (notificationResponse?.success ?? false) {
         // showCustomSnackBar(
         //   message: specializationResponse?.message ?? '',
         //   isSuccess: true,
         // );
       } else {
         showCustomSnackBar(
-          message: statsResponse?.message ?? '',
+          message: notificationResponse?.message ?? '',
         );
       }
     } catch (e) {

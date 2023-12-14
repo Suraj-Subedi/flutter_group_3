@@ -25,6 +25,12 @@ class HomeView extends GetView<HomeController> {
               await showSearch(context: context, delegate: SearchView());
             },
             icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () async {
+              Get.toNamed(Routes.NOTIFICATION);
+            },
+            icon: const Icon(Icons.notifications),
           )
         ],
       ),

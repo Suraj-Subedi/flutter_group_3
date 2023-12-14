@@ -20,6 +20,7 @@ abstract class Routes {
   static const DOCTOR_DETAIL = _Paths.DOCTOR_DETAIL;
   static const RANDOM = _Paths.RANDOM;
   static const DETAIL_CATEGORY = _Paths.DETAIL_CATEGORY;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const DOCTOR_DETAIL = '/doctor-detail';
   static const RANDOM = '/random';
   static const DETAIL_CATEGORY = '/detail-category';
+  static const NOTIFICATION = '/notification';
 }
