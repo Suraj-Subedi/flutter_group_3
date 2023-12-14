@@ -9,6 +9,7 @@ if (!isset($_POST['token'])) {
 
 include "./database/connection.php";
 include "./helpers/auth.php";
+include "./helpers/notify.php";
 
 $token = $_POST['token'];
 $user_id = getUserId($token);
@@ -29,7 +30,25 @@ if (
     global $CON;
     $result = mysqli_query($CON, $sql);
     $appointment_id = mysqli_insert_id($CON);
+
+    $sql = "select * from doctors where id='$doctor_id'";
+
+    $result = mysqli_query($CON, $sql);
+
+    $doctor = mysqli_fetch_assoc($result);
+
+    $doctor_name = $doctor['name'];
+    $hospital_id = $doctor['hospital_id'];
+
+    $title = "Appointment made with $doctor_name";
+    $description = "Your appointment with $doctor_name has been made successfully!";
+    $user_id = getUserId($token);
+
+    sendNotification($title, $description, $user_id);
+    sendNotification($title, $description, $hospital_id);
+
     if ($result) {
+
         echo json_encode([
             "success" => true,
             "message" => "Appointment made successfully!",
