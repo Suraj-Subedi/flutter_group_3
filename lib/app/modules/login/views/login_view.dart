@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/login_controller.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
@@ -24,15 +25,20 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Image(image: NetworkImage(''))
-                  CircleAvatar(
-                    radius: 100,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        'assets/images/doctor.jpg',
-                        height: 250,
-                      ),
-                    ),
+                  // CircleAvatar(
+                  //   radius: 100,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(100),
+                  //     child: Image.asset(
+                  //       'assets/images/doctor.jpg',
+                  //       height: 250,
+                  //     ),
+                  //   ),
+                  // ),
+                  Lottie.asset(
+                    'assets/lottie/login.json',
+                    height: 250,
+                    repeat: true,
                   ),
                   const SizedBox(height: 50),
                   const Text(

@@ -4,6 +4,7 @@ import 'package:ecom_3/app/utils/memory.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../controllers/admin_home_controller.dart';
 
@@ -34,6 +35,21 @@ class AdminHomeView extends GetView<AdminHomeController> {
               );
             }
             return Wrap(children: [
+              SizedBox(
+                height: 50,
+                width: Get.width,
+              ),
+              Center(
+                child: Lottie.asset(
+                  'assets/lottie/dashboard.json',
+                  height: 200,
+                  repeat: true,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                width: Get.width,
+              ),
               StatsCard(
                 title: 'Doctors',
                 value: controller.statsResponse!.stats?.noOfDoctors ?? '',

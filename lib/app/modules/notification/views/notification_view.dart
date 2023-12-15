@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../controllers/notification_controller.dart';
 
@@ -23,8 +24,20 @@ class NotificationView extends GetView<NotificationController> {
           }
 
           if (controller.notificationResponse?.notifications?.isEmpty ?? true) {
-            return const Center(
-              child: Text('No notifications', style: TextStyle(fontSize: 20)),
+            return Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Lottie.asset(
+                    'assets/lottie/notification.json',
+                    height: 200,
+                    repeat: true,
+                  ),
+                  Text('No notifications', style: TextStyle(fontSize: 20)),
+                ],
+              ),
             );
           }
 
